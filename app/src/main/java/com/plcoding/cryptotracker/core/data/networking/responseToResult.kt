@@ -5,6 +5,10 @@ import com.plcoding.cryptotracker.core.domain.util.NetworkError
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import kotlinx.serialization.json.Json
 
 suspend inline fun <reified T> responseToResult(
     response: HttpResponse
@@ -12,7 +16,18 @@ suspend inline fun <reified T> responseToResult(
     return when(response.status.value) {
         in 200..299 -> {
             try {
-                Result.Success(response.body<T>())
+                val body: T = when (response.contentType()?.contentType) {
+                    ContentType.Application.Json.contentType -> response.body()
+                    ContentType.Text.Html.contentType -> {
+                        val responseBody = response.bodyAsText()
+                        val json = Json { ignoreUnknownKeys = true }
+                        json.decodeFromString(responseBody)
+                    }
+                    else -> {
+                        response.body()
+                    }
+                }
+                Result.Success(body)
             } catch (e: NoTransformationFoundException) {
                 Result.Error(NetworkError.SERIALIZATION)
             }
