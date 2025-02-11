@@ -27,18 +27,28 @@ import com.plcoding.cryptotracker.ui.theme.greenBackground
 @Composable
 fun PriceChange(
     modifier: Modifier = Modifier,
-    change: DisplayableNumber
+    change: DisplayableNumber?
 ) {
-    val contentColor = if (change.value < 0.0) {
-        MaterialTheme.colorScheme.onErrorContainer
-    } else {
-        Color.Green
+    val contentColor = when (change) {
+        null -> MaterialTheme.colorScheme.onSurfaceVariant
+        else -> {
+            if (change.value < 0.0) {
+                MaterialTheme.colorScheme.onErrorContainer
+            } else {
+                Color.Green
+            }
+        }
     }
 
-    val backgroundColor = if (change.value < 0.0) {
-        MaterialTheme.colorScheme.errorContainer
-    } else {
-        greenBackground
+    val backgroundColor = when (change) {
+        null -> MaterialTheme.colorScheme.surfaceVariant
+        else -> {
+            if (change.value < 0.0) {
+                MaterialTheme.colorScheme.errorContainer
+            } else {
+                greenBackground
+            }
+        }
     }
 
     Row(
@@ -49,24 +59,35 @@ fun PriceChange(
         verticalAlignment = Alignment.CenterVertically
 
     ) {
-        Icon(
-            imageVector = if (change.value < 0.0) {
-                Icons.Default.KeyboardArrowDown
-            } else {
-                Icons.Default.KeyboardArrowUp
-            },
+        if (change != null) {
+            Icon(
+                imageVector = if (change.value < 0.0) {
+                    Icons.Default.KeyboardArrowDown
+                } else {
+                    Icons.Default.KeyboardArrowUp
+                },
 
-            contentDescription = null,
-            modifier = Modifier.size(20.dp),
-            tint = contentColor
-        )
+                contentDescription = null,
+                modifier = Modifier.size(20.dp),
+                tint = contentColor
+            )
 
-        Text(
-            text = "${change.formatted} %",
-            color = contentColor,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
-        )
+            Text(
+                text = "${change.formatted} %",
+                color = contentColor,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
+            )
+        } else {
+            Text(
+                text = "Unknown",
+                color = contentColor,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier
+                    .padding(2.dp)
+            )
+        }
     }
 }
 

@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
@@ -138,32 +140,41 @@ fun CoinDetailScreen(
                     icon = ImageVector.vectorResource(R.drawable.dollar)
                 )
 
-                val absoluteChangeFormatted =
-                    (coin.priceUsd.value * (coin.changePercent24H.value / 100))
-                        .toDisplayableNumber()
+                if (coin.changePercent24H != null) {
+                    val absoluteChangeFormatted =
+                        (coin.priceUsd.value * (coin.changePercent24H.value / 100))
+                            .toDisplayableNumber()
 
-                val isPositive = coin.changePercent24H.value > 0.0
+                    val isPositive = coin.changePercent24H.value > 0.0
 
-                val contentColor = if (isPositive) {
-                    if (isSystemInDarkTheme()) {
-                        Color.Green
+                    val contentColor = if (isPositive) {
+                        if (isSystemInDarkTheme()) {
+                            Color.Green
+                        } else {
+                            greenBackground
+                        }
                     } else {
-                        greenBackground
+                        MaterialTheme.colorScheme.error
                     }
-                } else {
-                    MaterialTheme.colorScheme.error
-                }
 
-                InfoCard(
-                    title = stringResource(R.string.change_last_24h),
-                    formattedText = absoluteChangeFormatted.formatted,
-                    icon = if (isPositive) {
-                        ImageVector.vectorResource(id = R.drawable.trending)
-                    } else {
-                        ImageVector.vectorResource(id = R.drawable.trending_down)
-                    },
-                    contentColor = contentColor
-                )
+                    InfoCard(
+                        title = stringResource(R.string.change_last_24h),
+                        formattedText = absoluteChangeFormatted.formatted,
+                        icon = if (isPositive) {
+                            ImageVector.vectorResource(id = R.drawable.trending)
+                        } else {
+                            ImageVector.vectorResource(id = R.drawable.trending_down)
+                        },
+                        contentColor = contentColor
+                    )
+                } else {
+                    InfoCard(
+                        title = stringResource(R.string.change_last_24h),
+                        formattedText = "Unknown",
+                        icon = Icons.Default.CloudOff,
+                        contentColor = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                }
             }
 
             var maxDataSize by remember { mutableIntStateOf(0) }
