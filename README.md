@@ -1,49 +1,49 @@
 # Crypto Tracker
 
-A modern Android application built with Jetpack Compose that tracks real-time cryptocurrency data, providing detailed information and price trends for major cryptocurrencies.
+Una moderna aplicación para Android desarrollada con Jetpack Compose que permite monitorear datos de criptomonedas en tiempo real, proporcionando información detallada y tendencias de precios de las principales criptomonedas.
 
-## Features
+## Características
 
-- Real-time cryptocurrency price tracking
-- Detailed view for each cryptocurrency including:
-  - Current price
-  - Market capitalization
-  - 24-hour price change
-  - 5-hour interval trend charts
-- Material Design 3 implementation
-- Clean and intuitive user interface
-- Dark/Light theme support
+- Seguimiento de precios de criptomonedas en tiempo real.
+- Vista detallada para cada criptomoneda que incluye:
+  - Precio actual.
+  - Capitalización de mercado.
+  - Variación de precio en las últimas 24 horas.
+  - Gráficos de tendencia en intervalos de 5 horas.
+- Implementación con Material Design 3.
+- Interfaz limpia e intuitiva.
+- Compatibilidad con temas claro y oscuro.
 
-## Screenshots
+## Capturas de Pantalla
 
-| Home Screen | Detail View with Chart |
-|------------|-------------|
-|![Home Screen](/screenshots/home.jpeg)|![Detail View](/screenshots/detail.jpeg)|
+| Inicio | Vista Detallada con Gráfico |
+|---------|---------------------------|
+| ![Pantalla de inicio](/screenshots/home.jpeg) | ![Vista detallada](/screenshots/detail.jpeg) |
 
-## Technology Stack
+## Tecnologías Utilizadas
 
-- **UI Framework**: Jetpack Compose with Material 3
-- **Programming Language**: Kotlin
-- **Architecture**: Clean Architecture
-  - Domain Layer
-  - Data Layer
-  - Presentation Layer
-- **Dependency Injection**: Koin
-- **Networking**: Ktor
-- **Other Libraries**:
-  - Compose Navigation
-  - Kotlinx Serialization
-  - Compose Charts
+- **Framework de UI**: Jetpack Compose con Material 3.
+- **Lenguaje de Programación**: Kotlin.
+- **Arquitectura**: Clean Architecture.
+  - Capa de Dominio.
+  - Capa de Datos.
+  - Capa de Presentación.
+- **Inyección de Dependencias**: Koin.
+- **Networking**: Ktor.
+- **Otras Bibliotecas**:
+  - Compose Navigation.
+  - Kotlinx Serialization.
+  - Compose Charts.
 
-## Installation
+## Instalación
 
-1. Clone this repository
-2. Open project in Android Studio
-3. Build and run on an emulator or physical device
+1. Clona este repositorio.
+2. Abre el proyecto en Android Studio.
+3. Compila y ejecuta la aplicación en un emulador o dispositivo físico.
 
-## Requirements
+## Requisitos
 
-- Android Studio Koala or newer
-- Minimum SDK: 26
-- Target SDK: 35
-- Kotlin 2.0 or newer
+- Android Studio Koala o una versión más reciente.
+- SDK mínimo: 26.
+- SDK objetivo: 35.
+- Kotlin 2.0 o superior.
